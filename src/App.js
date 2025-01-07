@@ -29,9 +29,7 @@ function App() {
 
     try {
       await jsonApiInstance.delete(`/posts/${id}`);
-      setPosts((prevPosts) =>
-        prevPosts.filter((post) => post.id !== Number(id))
-      );
+      setPosts(posts.filter((post) => post.id !== Number(id)));
     } catch (err) {
       console.log(err);
     }
