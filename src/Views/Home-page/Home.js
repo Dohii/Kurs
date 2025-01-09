@@ -20,11 +20,10 @@ function Home() {
   return (
     <>
       <div className='App'>
-        <Header />
         <header className='App-header'>
           {users &&
             users.map((user) => (
-              <div>
+              <div key={user.name}>
                 <p>Ime:{user?.name}</p>
                 <p>Prezime:{user?.last_name}</p>
                 <p>
