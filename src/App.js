@@ -30,7 +30,7 @@ function App() {
                 Korisnicko Ime:<b>{user?.username}</b>
               </p>
               <p>
-                Aktivan:<b>{user?.is_active}</b>
+                Aktivan Korisnik:<b>{user?.is_active}</b>
               </p>
             </div>
           ))}
