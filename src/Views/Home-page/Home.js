@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import supabaseClient from '../../api/axiosConfig';
-import Header from '../../Components/Header';
 
 function Home() {
   const [users, setUsers] = useState();

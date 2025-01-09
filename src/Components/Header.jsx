@@ -1,19 +1,15 @@
-import { Group, UnstyledButton } from '@mantine/core';
+import { Group, Button } from '@mantine/core';
 import classes from './Header.module.css';
 
 function Header() {
   return (
     <Group justify='center'>
       <Group gap='xl' mr='140' pt='20' pb='20' grow>
-        <UnstyledButton component='a' className={classes.solidBtn}>
-          Users
-        </UnstyledButton>
-        <UnstyledButton className={classes.solidBtn}>Posts</UnstyledButton>
+        <Button className={classes.solidBtn}>Users</Button>
+        <Button className={classes.solidBtn}>Posts</Button>
       </Group>
       <Group gap='sm'>
-        <UnstyledButton className={classes.borderBtn}>
-          Registration
-        </UnstyledButton>
+        <Button className={classes.borderBtn}>Registration</Button>
       </Group>
     </Group>
   );
