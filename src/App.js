@@ -1,65 +1,36 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import jsonApiInstance from "./api/axiosConfig";
+import supabaseClient from "./api/axiosConfig";
 
 function App() {
-  const [posts, setPosts] = useState();
-  const [id, setId] = useState();
-
-  const fetchPosts = async () => {
-    try {
-      const response = await jsonApiInstance.get("/posts");
-      setPosts(response.data);
-      console.log(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [users, setUsers] = useState();
 
   useEffect(() => {
-    fetchPosts();
+    const fetchUsers = async () => {
+      try {
+        const { data } = await supabaseClient.get("/users");
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
   }, []);
-
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
-
-  const handleDelete = async (e) => {
-    e.preventDefault();
-
-    try {
-      await jsonApiInstance.delete(`/posts/${id}`);
-      setPosts(posts.filter((post) => post.id !== Number(id)));
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <form onSubmit={handleDelete}>
-          <label>Id</label>
-          <input
-            id="id"
-            type="number"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-
-          <button type="submit">obrisi</button>
-        </form>
-
-        {posts &&
-          posts.map((post) => (
+        {users &&
+          users.map((user) => (
             <div>
-              <p>Title:{post?.title}</p>
-              <p>Body:{post?.body}</p>
+              <p>Ime:{user?.name}</p>
+              <p>Prezime:{user?.last_name}</p>
               <p>
-                user ID:<b>{post?.userId}</b>
+                Korisnicko Ime:<b>{user?.username}</b>
               </p>
               <p>
-                ID:<b>{post?.id}</b>
+                Aktivan:<b>{user?.is_active}</b>
               </p>
             </div>
           ))}

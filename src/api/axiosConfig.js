@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const jsonApiInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+const supabaseClient = axios.create({
+  baseURL: process.env.REACT_APP_SUPABASE_URL + "/rest/v1",
   headers: {
-    "Content-Type": "application/json",
+    apiKey: process.env.REACT_APP_SUPABASE_API_KEY,
+    Authorization: `Bearer ${process.env.REACT_APP_SUPABASE_API_KEY}`,
   },
 });
 
-export default jsonApiInstance;
+export default supabaseClient;
