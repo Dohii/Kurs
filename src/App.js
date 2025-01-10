@@ -1,13 +1,13 @@
 import './App.css';
 import { Sitemap } from './common/sitemaps';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './Components/Header';
+import Header from './Components/Header/Header';
 
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           {Sitemap &&
             Sitemap.map((route, index) => (
