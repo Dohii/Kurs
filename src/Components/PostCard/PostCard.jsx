@@ -11,16 +11,7 @@ function PostCard({ image, title, creationDate, description }) {
     .toString()
     .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
   return (
-    <Card
-      shadow='sm'
-      padding='lg'
-      radius='md'
-      withBorder
-      w='300'
-      mt='50'
-      ml='auto'
-      mr='auto'
-    >
+    <Card shadow='sm' padding='lg' radius='md' withBorder w='300'>
       <Card.Section>
         <Image src={image} height={160} alt='Norway' />
       </Card.Section>

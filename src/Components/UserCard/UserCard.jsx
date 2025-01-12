@@ -10,7 +10,13 @@ function UserCard({ name, lastName, username, activityStatus, processing }) {
   )},${Math.floor(Math.random() * 255)})`;
 
   return (
-    <Card shadow='sm' p='50' component='a' w='500'>
+    <Card
+      shadow='sm'
+      p='50'
+      component='a'
+      w='500'
+      bd='1px solid rgba(94, 94, 94, 0.08)'
+    >
       <Flex direction='row' gap='20'>
         <h2
           className={classes.avatar}

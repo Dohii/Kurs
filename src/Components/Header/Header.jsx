@@ -27,7 +27,7 @@ function Header() {
 
   return (
     <>
-      <Group justify='center'>
+      <Group justify='center' shadow='sm'>
         <ReactLogo />
         <Group gap='xl' mr='140' pt='20' pb='20' grow>
           <Button

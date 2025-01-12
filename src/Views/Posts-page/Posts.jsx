@@ -2,6 +2,7 @@ import supabaseClient from '../../api/axiosConfig';
 import { useEffect, useState } from 'react';
 import PostCard from '../../Components/PostCard/PostCard';
 import { Flex } from '@mantine/core';
+import classes from './Posts.module.css';
 
 function Posts() {
   const [posts, setPosts] = useState();
@@ -18,15 +19,7 @@ function Posts() {
     fetchingPosts();
   }, []);
   return (
-    <Flex
-      mih={50}
-      bg='rgba(0, 0, 0, .3)'
-      gap='lg'
-      justify='flex-start'
-      align='flex-start'
-      direction='row'
-      wrap='wrap'
-    >
+    <Flex className={classes.wrapper}>
       {posts &&
         posts.map((post) => (
           <PostCard

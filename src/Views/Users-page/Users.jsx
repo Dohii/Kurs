@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import supabaseClient from '../../api/axiosConfig';
 import UserCard from '../../Components/UserCard/UserCard';
-import { Flex } from '@mantine/core';
+import { Flex, Group } from '@mantine/core';
+import classes from './Users.module.css';
 
 function Users() {
   const [users, setUsers] = useState();
@@ -20,16 +21,7 @@ function Users() {
     fetchUsers();
   }, []);
   return (
-    <Flex
-      mih={50}
-      bg='rgba(0, 0, 0, 0)'
-      gap='md'
-      justify='flex-start'
-      align='flex-start'
-      direction='row'
-      wrap='wrap'
-      ml='30'
-    >
+    <Flex className={classes.wrapper}>
       {users &&
         users.map((user) => (
           <div key={user.name}>

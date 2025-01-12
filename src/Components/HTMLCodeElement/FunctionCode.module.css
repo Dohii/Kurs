@@ -1,0 +1,27 @@
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  justify-content: start;
+  text-align: left;
+  gap: 0px;
+}
+.flex > div {
+  height: 24px;
+}
+.flex span {
+  font-size: 15px;
+  line-height: 1;
+}
+.color1 {
+  color: rgb(119, 183, 215);
+}
+.color2 {
+  color: rgb(134, 217, 202);
+}
+.color3 {
+  color: rgb(223, 171, 92);
+}
+.colorwhite {
+  color: white;
+}
