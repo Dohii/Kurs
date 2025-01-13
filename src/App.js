@@ -1,41 +1,45 @@
 import "./App.css";
+import Header from "./Components/Header/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Posts from "./Views/Posts";
+import Users from "./Views/Users";
 import { useEffect, useState } from "react";
 import supabaseClient from "./api/axiosConfig";
+import { Container } from "@mantine/core";
 
 function App() {
   const [users, setUsers] = useState();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const { data } = await supabaseClient.get("/users");
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
+  const fetchUsers = async () => {
+    try {
+      const { data } = await supabaseClient.get("/users");
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchUsers();
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {users &&
-          users.map((user) => (
-            <div>
-              <p>Ime:{user?.name}</p>
-              <p>Prezime:{user?.last_name}</p>
-              <p>
-                Korisnicko Ime:<b>{user?.username}</b>
-              </p>
-              <p>
-                Aktivan:<b>{user?.is_active}</b>
-              </p>
-            </div>
-          ))}
-      </header>
-    </div>
+    <Container fluid>
+      <BrowserRouter>
+        <Header users={users} fetchUsers={fetchUsers} />
+        <Routes>
+          <Route path="/posts" element={<Posts />} />
+          <Route
+            path="/users"
+            element={<Users users={users} fetchUsers={fetchUsers} />}
+          />
+          <Route
+            path="/"
+            element={<Users users={users} fetchUsers={fetchUsers} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </Container>
   );
 }
 
