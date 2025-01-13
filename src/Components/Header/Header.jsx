@@ -3,7 +3,7 @@ import classes from './Header.module.css';
 import { useNavigate } from 'react-router-dom';
 import ReactLogo from '../ReactLogo/ReactLogo';
 import { useDisclosure } from '@mantine/hooks';
-import { useEffect, useState, useId } from 'react';
+import { useState, useId } from 'react';
 import supabaseClient from '../../api/axiosConfig';
 
 function Header() {
@@ -15,15 +15,26 @@ function Header() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const handleSubmit = async () => {
-  //   // console.log('Name: ' + name);
-  //   // console.log('Last name: ' + lastName);
-  //   // console.log('Username: ' + username);
-  //   // console.log('Password: ' + password);
-  //   // console.log('User ID: ' + userId);
-  //   await supabaseClient.post(`/posts/${userId}`);
-  //   const
-  // };
+  const handleSubmit = async (e) => {
+    // console.log('Name: ' + name);
+    // console.log('Last name: ' + lastName);
+    // console.log('Username: ' + username);
+    // console.log('Password: ' + password);
+    // console.log('User ID: ' + userId);
+    e.preventDefault();
+    try {
+      await supabaseClient.post(`/users`, {
+        name: name,
+        last_name: lastName,
+        username: username,
+        password: password,
+        id: userId,
+      });
+      // navigate('/users');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -50,7 +61,7 @@ function Header() {
         </Group>
       </Group>
       <Modal opened={opened} onClose={close} title='Registration' centered>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <Flex gap='10' mb='10'>
             <label style={{ width: '30%' }}>Name</label>
             <input
@@ -94,7 +105,7 @@ function Header() {
           <Group justify='center' mt='10'>
             <Button
               className={classes.solidBtn}
-              // type='submit'
+              type='submit'
               // onClick={handleSubmit}
             >
               Register user
