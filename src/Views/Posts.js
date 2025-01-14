@@ -2,22 +2,11 @@ import { useEffect, useState } from "react";
 import supabaseClient from "../api/axiosConfig";
 import PostCard from "../Components/PostCard/PostCard";
 import { Container, Grid } from "@mantine/core";
+import { useSupabase } from "../Shared/AppContext";
 
 function Posts() {
-  const [posts, setPosts] = useState();
-
-  const fetchPosts = async () => {
-    try {
-      const { data } = await supabaseClient.get("/posts");
-      setPosts(data);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const { users, posts, loading, error } = useSupabase();
+  console.log(posts);
 
   return (
     <Container m={30} fluid>
