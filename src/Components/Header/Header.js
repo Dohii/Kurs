@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import RegistrationDialog from "../RegistrationDialog/RegistrationDialog";
 import { useState } from "react";
 
-function Header({ users, fetchUsers }) {
+function Header() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
   return (
@@ -19,12 +19,7 @@ function Header({ users, fetchUsers }) {
         <Button onClick={() => setDialogOpen(true)} radius="mg">
           Registration
         </Button>
-        <RegistrationDialog
-          open={dialogOpen}
-          setOpen={setDialogOpen}
-          nextId={users?.length ? users.length + 1 : 1}
-          fetchUsers={fetchUsers}
-        />
+        <RegistrationDialog open={dialogOpen} setOpen={setDialogOpen} />
       </Box>
     </Center>
   );

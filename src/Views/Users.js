@@ -1,14 +1,17 @@
+import { useSelector } from "react-redux";
 import UserCard from "../Components/UserCard/UserCard";
 import { Container, Grid } from "@mantine/core";
 
-function Users({ users, fetchUsers }) {
+function Users() {
+  // @ts-ignore
+  const data = useSelector((state) => state.userReducer);
   return (
     <Container m={0} mt={30} fluid>
       <Grid>
-        {users &&
-          users.map((user, index) => (
+        {data?.users &&
+          data.users.map((user, index) => (
             <Grid.Col span={3} key={`user_${index}`}>
-              <UserCard user={user} fetchUsers={fetchUsers} />
+              <UserCard user={user} />
             </Grid.Col>
           ))}
       </Grid>

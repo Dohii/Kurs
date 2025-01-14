@@ -1,12 +1,15 @@
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
 import supabaseClient from "../../api/axiosConfig";
+import { useDispatch } from "react-redux";
+import { triggerRefetch } from "../../Store/Slices/UserSlice";
 
-function UserCard({ user, fetchUsers }) {
+function UserCard({ user }) {
+  const dispatch = useDispatch();
   const handleDelete = async () => {
     if (user) {
       try {
         await supabaseClient.delete(`/users/${user.id}`);
-        fetchUsers();
+        dispatch(triggerRefetch());
       } catch (error) {
         console.error("Error saving user:", error);
       }

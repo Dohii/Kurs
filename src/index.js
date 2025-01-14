@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import "@mantine/core/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
+import { Provider } from "react-redux";
+import store from "./Store/Store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
@@ -11,8 +13,10 @@ const theme = createTheme({
 });
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={theme}>
-      <App />
-    </MantineProvider>
+    <Provider store={store}>
+      <MantineProvider theme={theme}>
+        <App />
+      </MantineProvider>
+    </Provider>
   </React.StrictMode>
 );
