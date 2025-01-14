@@ -4,15 +4,20 @@ import "./index.css";
 import App from "./App";
 import "@mantine/core/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
+import { Provider } from "react-redux";
+import store from "./Store/Store";
+import { SupabaseProvider } from "./Shared/AppContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const theme = createTheme({
-  /** Put your mantine theme override here */
-});
+
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={theme}>
-      <App />
-    </MantineProvider>
+    <SupabaseProvider>
+      <Provider store={store}>
+        <MantineProvider>
+          <App />
+        </MantineProvider>
+      </Provider>
+    </SupabaseProvider>
   </React.StrictMode>
 );

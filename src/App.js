@@ -1,41 +1,43 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import Header from "./Components/Header/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Posts from "./Views/Posts";
+import Users from "./Views/Users";
+import { useEffect } from "react";
 import supabaseClient from "./api/axiosConfig";
+import { Container } from "@mantine/core";
+import { useDispatch } from "react-redux";
+import { setData, setRefetch } from "./Store/Slices/UserSlice";
 
 function App() {
-  const [users, setUsers] = useState();
+  const dispatch = useDispatch();
+
+  const fetchUsers = async () => {
+    try {
+      const { data } = await supabaseClient.get("/users");
+      dispatch(setData(data));
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const { data } = await supabaseClient.get("/users");
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
     fetchUsers();
+    dispatch(setRefetch(fetchUsers));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {users &&
-          users.map((user) => (
-            <div>
-              <p>Ime:{user?.name}</p>
-              <p>Prezime:{user?.last_name}</p>
-              <p>
-                Korisnicko Ime:<b>{user?.username}</b>
-              </p>
-              <p>
-                Aktivan:<b>{user?.is_active}</b>
-              </p>
-            </div>
-          ))}
-      </header>
-    </div>
+    <Container fluid>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/" element={<Users />} />
+        </Routes>
+      </BrowserRouter>
+    </Container>
   );
 }
 
