@@ -15,7 +15,7 @@ function Posts() {
           // @ts-ignore
           posts.map((post, index) => (
             <Grid.Col span={3} key={`post_${index}`}>
-              <PostCard post={post} />
+              <PostCard />
             </Grid.Col>
           ))}
       </Grid>

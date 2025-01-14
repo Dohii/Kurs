@@ -1,6 +1,10 @@
 import { Badge, Card, Group, Image, Text } from "@mantine/core";
 
-function PostCard({ post }) {
+interface PostCardProps {
+  post: any;
+}
+
+function PostCard({ post }: PostCardProps) {
   return (
     <>
       <Card

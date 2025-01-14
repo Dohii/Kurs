@@ -4,7 +4,6 @@ import { Button, Container, Grid } from "@mantine/core";
 import { useSupabase } from "../Shared/AppContext";
 
 function Users() {
-  // @ts-ignore
   const {
     users,
     fetchUsers,

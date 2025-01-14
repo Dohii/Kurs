@@ -19,7 +19,7 @@ function Header() {
         <Button onClick={() => setDialogOpen(true)} radius="mg">
           Registration
         </Button>
-        <RegistrationDialog open={dialogOpen} setOpen={setDialogOpen} />
+        <RegistrationDialog open={dialogOpen} setOpen={() => setDialogOpen} />
       </Box>
     </Center>
   );
