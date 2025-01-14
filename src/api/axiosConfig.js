@@ -1,4 +1,6 @@
+
 import axios from "axios";
+// import { createClient } from "@supabase/supabase-js"
 
 const supabaseClient = axios.create({
   baseURL: process.env.REACT_APP_SUPABASE_URL + "/rest/v1",

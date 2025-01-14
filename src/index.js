@@ -8,7 +8,7 @@ import { createTheme, MantineProvider } from "@mantine/core";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
   /** Put your mantine theme override here */
-});
+  });
 root.render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
