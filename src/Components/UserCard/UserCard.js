@@ -8,7 +8,7 @@ function UserCard({ user }) {
   const handleDelete = async () => {
     if (user) {
       try {
-        await supabaseClient.delete(`/users/${user.id}`);
+        await supabaseClient.delete(`/users?id=eq.${user.id}`);
         dispatch(triggerRefetch());
       } catch (error) {
         console.error("Error saving user:", error);
