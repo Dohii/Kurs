@@ -36,7 +36,9 @@ function Registration() {
         return;
       }
 
-      const { data, error } = await supabaseClient.from("users").insert([
+      const { data, error } = await supabaseClient.post(
+        "/users",
+        [
         {
           name,
           last_name,
@@ -44,7 +46,7 @@ function Registration() {
           password,
           is_active: true,
           created_at: new Date().toISOString(),
-        },
+        }
       ]);
 
       if (error) {

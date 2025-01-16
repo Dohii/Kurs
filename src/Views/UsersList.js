@@ -35,7 +35,7 @@ function UsersList() {
 
 const deleteUser = async (userId) => {
     try {
-      const { error } = await supabaseClient.from("users").delete().eq("id", userId);
+      const { error } = await supabaseClient.delete(`/users?id=eq.${userId}`);
       if (error) {
         throw error;
       }
