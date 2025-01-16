@@ -15,7 +15,6 @@ function RegistrationDialog({ open, setOpen }) {
   );
 
   const [user, setUser] = useState({
-    id: null,
     is_active: false,
     name: null,
     last_name: null,
@@ -26,8 +25,7 @@ function RegistrationDialog({ open, setOpen }) {
   const handleOnSubmit = async () => {
     if (user.name && user.last_name && user.username && user.password) {
       try {
-        const newUser = { ...user, id: nextId };
-        await supabaseClient.post("/users", newUser);
+        await supabaseClient.post("/users", user);
         dispatch(triggerRefetch());
         setOpen(false);
       } catch (error) {
