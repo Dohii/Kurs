@@ -1,8 +1,11 @@
 import UserCard from '../../Components/UserCard/UserCard';
 import { Flex } from '@mantine/core';
 import classes from './Users.module.css';
+import { useUsersContext } from '../../common/UsersContext';
+// import { useSupabase } from '../../common/AppContext';
 
-function Users({ users, fetchUsers }) {
+function Users() {
+  const { users } = useUsersContext();
   return (
     <Flex className={classes.wrapper}>
       {users &&
@@ -14,7 +17,6 @@ function Users({ users, fetchUsers }) {
               username={user.username}
               activityStatus={user.is_active}
               processing={user.is_active}
-              fetchUsers={fetchUsers}
               id={user.id}
             ></UserCard>
           </div>

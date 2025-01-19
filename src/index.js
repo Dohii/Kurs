@@ -4,6 +4,9 @@ import '@mantine/core/styles.css';
 import './index.css';
 import App from './App';
 import { createTheme, MantineProvider } from '@mantine/core';
+import { UsersProvider } from './common/UsersContext';
+import { PostsProvider } from './common/PostsContext';
+import { AppProvider } from './common/AppContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({
@@ -11,8 +14,14 @@ const theme = createTheme({
 });
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={theme}>
-      <App />
-    </MantineProvider>
+    <UsersProvider>
+      <PostsProvider>
+        <AppProvider>
+          <MantineProvider theme={theme}>
+            <App />
+          </MantineProvider>
+        </AppProvider>
+      </PostsProvider>
+    </UsersProvider>
   </React.StrictMode>
 );

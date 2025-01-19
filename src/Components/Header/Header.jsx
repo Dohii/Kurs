@@ -4,9 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import ReactLogo from '../ReactLogo/ReactLogo';
 import { useState } from 'react';
 import RegistrationBlock from '../RegistrationBlock/RegistrationBlock';
+import LoginBlock from '../LoginBlock/LoginBlock';
+import { useAppContext } from '../../common/AppContext';
 
 function Header({ users, fetchUsers }) {
+  const { loggedIn, setLoggedIn, loggedInUsername, setLoggedInUsername } =
+    useAppContext();
   const navigate = useNavigate();
+  const [loginOpen, setLoginOpen] = useState(false);
   const [registartionOpen, setRegistrationOpen] = useState(false);
 
   return (
@@ -27,21 +32,38 @@ function Header({ users, fetchUsers }) {
             Posts
           </Button>
         </Group>
-        <Group gap='sm'>
+        {loggedInUsername && loggedInUsername ? (
           <Button
             className={classes.borderBtn}
-            onClick={() => setRegistrationOpen(true)}
+            onClick={() => {
+              navigate('/user-profile');
+            }}
           >
-            Registration
+            {loggedInUsername}
           </Button>
-        </Group>
+        ) : (
+          <Group gap='sm'>
+            <Button
+              className={classes.borderBtn}
+              onClick={() => setRegistrationOpen(true)}
+            >
+              Registration
+            </Button>
+            <Button
+              className={classes.solidBtn}
+              onClick={() => setLoginOpen(true)}
+            >
+              Login
+            </Button>
+          </Group>
+        )}
       </Group>
       <RegistrationBlock
         open={registartionOpen}
         setOpen={setRegistrationOpen}
-        nextId={users?.length ? users.length + 1 : 1}
         fetchUsers={fetchUsers}
       />
+      <LoginBlock open={loginOpen} setOpen={setLoginOpen} />
     </>
   );
 }

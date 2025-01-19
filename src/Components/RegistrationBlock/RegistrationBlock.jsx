@@ -2,25 +2,24 @@ import { Group, Button, Modal, Flex } from '@mantine/core';
 import supabaseClient from '../../api/axiosConfig';
 import { useState } from 'react';
 import classes from './RegistrationBlock.module.css';
+import { useUsersContext } from '../../common/UsersContext';
+// import { useSupabase } from '../../common/AppContext';
 
-function RegistrationBlock({ open, setOpen, nextId, fetchUsers }) {
+function RegistrationBlock({ open, setOpen }) {
+  const { fetchUsers } = useUsersContext();
   const [user, setUser] = useState({
-    id: null,
     is_active: null,
     name: null,
     last_name: null,
     username: null,
     password: null,
   });
-  const handleSubmit = async (e) => {
-    // e.preventDefault();
+  const handleSubmit = async () => {
     if (user.name && user.last_name && user.username && user.password) {
       try {
-        const newUser = { ...user, id: nextId };
-        console.log(newUser);
-        await supabaseClient.post(`/users`, newUser);
-        setOpen(false);
+        await supabaseClient.post(`/users`, user);
         fetchUsers();
+        setOpen(false);
       } catch (err) {
         console.log(err);
       }
@@ -33,11 +32,7 @@ function RegistrationBlock({ open, setOpen, nextId, fetchUsers }) {
       title='Registration'
       centered
     >
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <Flex gap='10' mb='10'>
           <label style={{ width: '30%' }}>Name</label>
           <input

@@ -1,6 +1,7 @@
 import { Card, Text, Flex, Indicator, Button } from '@mantine/core';
 import classes from './UserCard.module.css';
 import supabaseClient from '../../api/axiosConfig';
+import { useUsersContext } from '../../common/UsersContext';
 
 function UserCard({
   name,
@@ -9,7 +10,6 @@ function UserCard({
   activityStatus,
   processing,
   id,
-  fetchUsers,
 }) {
   const lastNameInital =
     lastName.slice(0, 1) === ' ' ? lastName.slice(1, 2) : lastName.slice(0, 1);
@@ -17,16 +17,15 @@ function UserCard({
   const randomColor = `rgb(${Math.floor(Math.random() * 255)},${Math.floor(
     Math.random() * 255
   )},${Math.floor(Math.random() * 255)})`;
+  const { fetchUsers } = useUsersContext();
 
   const handleDelete = async () => {
     try {
-      const response = await supabaseClient.delete(`/users/id=${Number(id)}`);
-      console.log(response);
+      await supabaseClient.delete(`/users?id=eq.${id}`);
       fetchUsers();
     } catch (err) {
       console.log(err);
     }
-    console.log(id.toString());
   };
 
   return (
