@@ -13,7 +13,11 @@ function PostCard({ image, title, creationDate, description }) {
   return (
     <Card shadow='sm' padding='lg' radius='md' withBorder w='300'>
       <Card.Section>
-        <Image src={image} height={160} alt='Norway' />
+        <Image
+          src={image && image ? image : 'https://picsum.photos/200/300'}
+          height={160}
+          alt='Norway'
+        />
       </Card.Section>
 
       <Flex justify='space-between' mt='md' mb='xs' direction='column'>

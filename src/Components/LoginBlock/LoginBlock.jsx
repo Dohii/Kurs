@@ -9,8 +9,8 @@ function LoginBlock({ open, setOpen }) {
     users,
     loggedIn,
     setLoggedIn,
-    loggedInUsername,
-    setLoggedInUsername,
+    loggedInUserData,
+    setLoggedInUserData,
   } = useAppContext();
   const navigate = useNavigate();
   const [error, setError] = useState(false);
@@ -29,7 +29,7 @@ function LoginBlock({ open, setOpen }) {
     });
     if (result.length > 0) {
       setLoggedIn(true);
-      setLoggedInUsername(user.username);
+      setLoggedInUserData(result[0]);
       setOpen(false);
       navigate('/user-profile');
     } else {

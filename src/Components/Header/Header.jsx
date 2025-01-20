@@ -8,7 +8,7 @@ import LoginBlock from '../LoginBlock/LoginBlock';
 import { useAppContext } from '../../common/AppContext';
 
 function Header({ users, fetchUsers }) {
-  const { loggedIn, setLoggedIn, loggedInUsername, setLoggedInUsername } =
+  const { loggedIn, setLoggedIn, loggedInUserData, setLoggedInUserData } =
     useAppContext();
   const navigate = useNavigate();
   const [loginOpen, setLoginOpen] = useState(false);
@@ -32,14 +32,14 @@ function Header({ users, fetchUsers }) {
             Posts
           </Button>
         </Group>
-        {loggedInUsername && loggedInUsername ? (
+        {loggedIn && loggedIn ? (
           <Button
             className={classes.borderBtn}
             onClick={() => {
               navigate('/user-profile');
             }}
           >
-            {loggedInUsername}
+            {loggedInUserData.username}
           </Button>
         ) : (
           <Group gap='sm'>

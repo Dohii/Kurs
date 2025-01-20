@@ -9,7 +9,7 @@ export const AppProvider = ({ children }) => {
   const { users, fetchUsers } = useUsersContext();
   const { posts, fetchPosts } = usePostsContext();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loggedInUsername, setLoggedInUsername] = useState();
+  const [loggedInUserData, setLoggedInUserData] = useState();
 
   return (
     <appContext.Provider
@@ -21,8 +21,8 @@ export const AppProvider = ({ children }) => {
         fetchPosts,
         loggedIn,
         setLoggedIn,
-        loggedInUsername,
-        setLoggedInUsername,
+        loggedInUserData,
+        setLoggedInUserData,
       }}
     >
       {children}

@@ -8,3 +8,31 @@
   padding: 50px;
   min-height: 100vh;
 }
+.notLoggedInMsg {
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+}
+h2.username {
+  color: white;
+  padding: 0px 30px 5px 0px;
+  border-bottom: 3px solid rgb(3, 94, 230);
+  width: fit-content;
+  height: fit-content;
+}
+h3.subtitle,
+h2.subtitle {
+  color: white;
+}
+h2.subtitle span,
+h3.subtitle span {
+  font-weight: 100;
+  font-size: 20px;
+  font-style: italic;
+}
+.avatar {
+  width: 100px;
+  margin-left: 200px;
+  border: 3px solid white;
+  border-radius: 50%;
+}
