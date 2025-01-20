@@ -11,7 +11,6 @@ export const PostsProvider = ({ children }) => {
     try {
       const response = await supabaseClient.get('/posts');
       setPosts(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }

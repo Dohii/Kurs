@@ -1,0 +1,13 @@
+.cardAnimation {
+  animation: cardAnimation 0.3s ease forwards;
+}
+@keyframes cardAnimation {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

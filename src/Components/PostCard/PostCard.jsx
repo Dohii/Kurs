@@ -1,4 +1,5 @@
 import { Card, Image, Text, Flex, Button, Group } from '@mantine/core';
+import classes from './PostCard.module.css';
 
 function PostCard({ image, title, creationDate, description }) {
   const date = new Date(creationDate);
@@ -11,7 +12,14 @@ function PostCard({ image, title, creationDate, description }) {
     .toString()
     .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
   return (
-    <Card shadow='sm' padding='lg' radius='md' withBorder w='300'>
+    <Card
+      className={classes.cardAnimation}
+      shadow='sm'
+      padding='lg'
+      radius='md'
+      withBorder
+      w='300'
+    >
       <Card.Section>
         <Image
           src={image && image ? image : 'https://picsum.photos/200/300'}

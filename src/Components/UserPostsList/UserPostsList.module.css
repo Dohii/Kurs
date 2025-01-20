@@ -1,0 +1,15 @@
+thead td {
+  border: 1px solid rgba(211, 211, 211, 0.438);
+  padding: 5px 35px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+tbody td {
+  border: 1px solid rgba(211, 211, 211, 0.438);
+  padding: 5px 35px;
+  color: rgba(255, 255, 255, 0.699);
+  font-size: 14px;
+  font-weight: 100;
+}

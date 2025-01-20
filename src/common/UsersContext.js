@@ -11,7 +11,6 @@ export const UsersProvider = ({ children }) => {
     try {
       const response = await supabaseClient.get('/users');
       setUsers(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }

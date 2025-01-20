@@ -35,6 +35,7 @@ function UserCard({
       component='a'
       w='500'
       bd='1px solid rgba(94, 94, 94, 0.08)'
+      className={classes.cardAnimation}
     >
       <Flex direction='row' gap='20'>
         <h2
