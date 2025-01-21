@@ -1,18 +1,9 @@
 import { Button, Modal, TextInput } from "@mantine/core";
-import { useMemo, useState } from "react";
-import supabaseClient from "../../api/axiosConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { triggerRefetch } from "../../Store/Slices/UserSlice";
+import { useState } from "react";
+import { useUserContext } from "../../Context/UserContext";
 
 function RegistrationDialog({ open, setOpen }) {
-  // @ts-ignore
-  const data = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
-
-  const nextId = useMemo(
-    () => (data?.users?.length ? data?.users.length + 1 : 1),
-    [data?.users.length]
-  );
+  const { createUser } = useUserContext();
 
   const [user, setUser] = useState({
     is_active: false,
@@ -23,15 +14,8 @@ function RegistrationDialog({ open, setOpen }) {
   });
 
   const handleOnSubmit = async () => {
-    if (user.name && user.last_name && user.username && user.password) {
-      try {
-        await supabaseClient.post("/users", user);
-        dispatch(triggerRefetch());
-        setOpen(false);
-      } catch (error) {
-        console.error("Error saving user:", error);
-      }
-    }
+    createUser(user);
+    setOpen(false);
   };
 
   return (
