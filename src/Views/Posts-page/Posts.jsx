@@ -10,9 +10,12 @@ function Posts() {
   const { users } = useUsersContext();
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [sortState, setSortState] = useState();
-  const [postToDisplay, setPostsToDisplay] = useState(posts || []);
+  const [postToDisplay, setPostsToDisplay] = useState([]);
 
   const handleSort = (filteredPosts) => {
+    if (!filteredPosts) {
+      return;
+    }
     return filteredPosts.sort((a, b) => {
       if (sortState === 'titleAscending') {
         return a.title.localeCompare(b.title);
@@ -28,6 +31,9 @@ function Posts() {
   };
 
   const filterPostsByAuthor = () => {
+    if (!posts) {
+      return;
+    }
     if (selectedAuthors.length === 0) {
       return [...posts];
     }
@@ -40,7 +46,7 @@ function Posts() {
     const filteredPosts = filterPostsByAuthor();
     const sortedPosts = handleSort(filteredPosts);
     setPostsToDisplay(sortedPosts);
-  }, [selectedAuthors, sortState]);
+  }, [selectedAuthors, sortState, posts]);
 
   return (
     <Flex className={classes.wrapper}>
@@ -90,7 +96,7 @@ function Posts() {
         />
       </Group>
       <Flex wrap='wrap' gap='30'>
-        {(postToDisplay?.length ? postToDisplay : posts).map((post) => (
+        {postToDisplay?.map((post) => (
           <PostCard
             key={post.id}
             title={post.title}
