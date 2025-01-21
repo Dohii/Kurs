@@ -40,6 +40,7 @@ function LoginBlock({ open, setOpen }) {
   return (
     <Modal opened={open} onClose={() => setOpen(false)} title='Login' centered>
       <form
+        className={classes.loginForm}
         onSubmit={(e) => {
           handleSubmit(e);
         }}

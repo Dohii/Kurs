@@ -20,3 +20,6 @@
   transition: all 0.3s ease;
   color: white;
 }
+.registrationForm label {
+  color: black;
+}

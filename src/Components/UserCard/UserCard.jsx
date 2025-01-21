@@ -42,11 +42,11 @@ function UserCard({
           className={classes.avatar}
           style={{ borderColor: randomColor, color: randomColor }}
         >
-          {initials}
+          {initials.toUpperCase()}
         </h2>
         <Flex direction='column' justify='center' ml='20'>
           <Text fw={700} fz='22'>
-            {name + lastName}
+            {name + ' ' + lastName}
           </Text>
           <Text fz='18' c='dimmed'>
             Username: {username}

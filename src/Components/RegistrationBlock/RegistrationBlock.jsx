@@ -32,7 +32,7 @@ function RegistrationBlock({ open, setOpen }) {
       title='Registration'
       centered
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={classes.registrationForm}>
         <Flex gap='10' mb='10'>
           <label style={{ width: '30%' }}>Name</label>
           <input
