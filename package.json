@@ -5,7 +5,7 @@
   "dependencies": {
     "@mantine/core": "^7.15.3",
     "@mantine/dates": "^7.15.3",
-    "@mantine/form": "^7.15.3",
+    "@mantine/form": "^7.16.1",
     "@mantine/hooks": "^7.15.3",
     "@mantine/modals": "^7.15.3",
     "@mantine/nprogress": "^7.15.3",

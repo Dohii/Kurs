@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
-import { useState, useEffect } from 'react';
-import supabaseClient from '../api/axiosConfig';
+import React, { createContext, useContext } from "react";
+import { useState, useEffect } from "react";
+import supabaseClient from "../api/axiosConfig";
 
 const postsContext = createContext(null);
 
@@ -9,7 +9,7 @@ export const PostsProvider = ({ children }) => {
 
   const fetchPosts = async () => {
     try {
-      const response = await supabaseClient.get('/posts');
+      const response = await supabaseClient.get("/posts");
       setPosts(response.data);
     } catch (err) {
       console.log(err);
@@ -29,7 +29,7 @@ export const PostsProvider = ({ children }) => {
 export const usePostsContext = () => {
   const context = useContext(postsContext);
   if (!context) {
-    throw new Error('use userContext only inside provider');
+    throw new Error("use userContext only inside provider");
   }
   return context;
 };

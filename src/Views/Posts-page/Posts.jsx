@@ -1,33 +1,36 @@
-import PostCard from '../../Components/PostCard/PostCard';
-import { Flex, Group, MultiSelect, Select } from '@mantine/core';
-import classes from './Posts.module.css';
-import { usePostsContext } from '../../common/PostsContext';
-import { useUsersContext } from '../../common/UsersContext';
-import { useState, useEffect } from 'react';
+import PostCard from "../../Components/PostCard/PostCard";
+import { Flex, Group, MultiSelect, Select } from "@mantine/core";
+import classes from "./Posts.module.css";
+import { usePostsContext } from "../../common/PostsContext";
+import { useUsersContext } from "../../common/UsersContext";
+import { useState, useEffect } from "react";
 
 function Posts() {
   const { posts } = usePostsContext();
   const { users } = useUsersContext();
   const [selectedAuthors, setSelectedAuthors] = useState([]);
-  const [sortState, setSortState] = useState();
-  const [postToDisplay, setPostsToDisplay] = useState(posts || []);
+  const [postToDisplay, setPostsToDisplay] = useState([]);
 
-  const handleSort = (filteredPosts) => {
-    return filteredPosts.sort((a, b) => {
-      if (sortState === 'titleAscending') {
+  const handleSort = (sortValue) => {
+    const sortedPosts = [...postToDisplay].sort((a, b) => {
+      if (String(sortValue) === "titleAscending") {
         return a.title.localeCompare(b.title);
-      } else if (sortState === 'titleDescending') {
+      } else if (String(sortValue) === "titleDescending") {
         return b.title.localeCompare(a.title);
-      } else if (sortState === 'createDateAscending') {
+      } else if (String(sortValue) === "createDateAscending") {
         return new Date(a.created_at) - new Date(b.created_at);
-      } else if (sortState === 'createDateDescending') {
+      } else if (String(sortValue) === "createDateDescending") {
         return new Date(b.created_at) - new Date(a.created_at);
       }
       return 0;
     });
+    setPostsToDisplay(sortedPosts);
   };
 
   const filterPostsByAuthor = () => {
+    if (!posts) {
+      return;
+    }
     if (selectedAuthors.length === 0) {
       return [...posts];
     }
@@ -36,21 +39,25 @@ function Posts() {
     );
   };
 
+  // useEffect(() => {
+  //   const filteredPosts = filterPostsByAuthor();
+
+  //   setPostsToDisplay(filteredPosts);
+  // }, [selectedAuthors]);
+
   useEffect(() => {
-    const filteredPosts = filterPostsByAuthor();
-    const sortedPosts = handleSort(filteredPosts);
-    setPostsToDisplay(sortedPosts);
-  }, [selectedAuthors, sortState]);
+    setPostsToDisplay(posts);
+  }, [posts]);
 
   return (
     <Flex className={classes.wrapper}>
       <Group>
         <MultiSelect
-          miw='300'
+          miw="300"
           clearable
           searchable
-          label='Filter posts by author'
-          placeholder='Select author'
+          label="Filter posts by author"
+          placeholder="Select author"
           data={users?.map((value) => ({
             value: String(value.id),
             label: value.username,
@@ -64,41 +71,42 @@ function Posts() {
           }}
         />
         <Select
-          miw='300'
-          label='Sort by:'
+          miw="300"
+          label="Sort by:"
           data={[
             {
               label: `title ascending`,
-              value: 'titleAscending',
+              value: "titleAscending",
             },
             {
               label: `title descending`,
-              value: 'titleDescending',
+              value: "titleDescending",
             },
             {
               label: `create date ascending`,
-              value: 'createDateAscending',
+              value: "createDateAscending",
             },
             {
               label: `create date descending`,
-              value: 'createDateDescending',
+              value: "createDateDescending",
             },
           ]}
-          onChange={(e) => {
-            setSortState(e);
+          onChange={(event) => {
+            handleSort(event);
           }}
         />
       </Group>
-      <Flex wrap='wrap' gap='30'>
-        {(postToDisplay?.length ? postToDisplay : posts).map((post) => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            description={post.description}
-            image={post.image}
-            creationDate={post.created_at}
-          />
-        ))}
+      <Flex wrap="wrap" gap="30">
+        {postToDisplay &&
+          postToDisplay.map((post) => (
+            <PostCard
+              key={post.id}
+              title={post.title}
+              description={post.description}
+              image={post.image}
+              creationDate={post.created_at}
+            />
+          ))}
       </Flex>
     </Flex>
   );

@@ -1,7 +1,7 @@
-import UserCard from '../../Components/UserCard/UserCard';
-import { Flex } from '@mantine/core';
-import classes from './Users.module.css';
-import { useUsersContext } from '../../common/UsersContext';
+import UserCard from "../../Components/UserCard/UserCard";
+import { Flex } from "@mantine/core";
+import classes from "./Users.module.css";
+import { useUsersContext } from "../../common/UsersContext";
 // import { useSupabase } from '../../common/AppContext';
 
 function Users() {
