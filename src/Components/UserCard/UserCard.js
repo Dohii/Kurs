@@ -1,20 +1,6 @@
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
-import supabaseClient from "../../api/axiosConfig";
-import { useDispatch } from "react-redux";
-import { triggerRefetch } from "../../Store/Slices/UserSlice";
 
 function UserCard({ user }) {
-  const dispatch = useDispatch();
-  const handleDelete = async () => {
-    if (user) {
-      try {
-        await supabaseClient.delete(`/users?id=eq.${user.id}`);
-        dispatch(triggerRefetch());
-      } catch (error) {
-        console.error("Error saving user:", error);
-      }
-    }
-  };
   return (
     <>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -35,13 +21,7 @@ function UserCard({ user }) {
           {user?.username}
         </Text>
 
-        <Button
-          color="red"
-          fullWidth
-          mt="md"
-          radius="lg"
-          onClick={handleDelete}
-        >
+        <Button color="red" fullWidth mt="md" radius="lg">
           Delete User
         </Button>
       </Card>

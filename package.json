@@ -11,6 +11,7 @@
     "@mantine/nprogress": "^7.15.3",
     "@mantine/spotlight": "^7.15.3",
     "@reduxjs/toolkit": "^2.5.0",
+    "@tabler/icons-react": "^3.29.0",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "dayjs": "^1.11.13",
