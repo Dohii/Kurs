@@ -9,11 +9,16 @@ function Posts() {
   const { posts } = usePostsContext();
   const { users } = useUsersContext();
   const [selectedAuthors, setSelectedAuthors] = useState([]);
+  const [sortState, setSortState] = useState();
+  const [postToDisplay, setPostsToDisplay] = useState([]);
   const [postToDisplay, setPostsToDisplay] = useState([]);
 
-  const handleSort = (sortValue) => {
-    const sortedPosts = [...postToDisplay].sort((a, b) => {
-      if (String(sortValue) === "titleAscending") {
+  const handleSort = (filteredPosts) => {
+    if (!filteredPosts) {
+      return;
+    }
+    return filteredPosts.sort((a, b) => {
+      if (sortState === "titleAscending") {
         return a.title.localeCompare(b.title);
       } else if (String(sortValue) === "titleDescending") {
         return b.title.localeCompare(a.title);
@@ -28,6 +33,9 @@ function Posts() {
   };
 
   const filterPostsByAuthor = () => {
+    if (!posts) {
+      return;
+    }
     if (!posts) {
       return;
     }
@@ -46,6 +54,10 @@ function Posts() {
   // }, [selectedAuthors]);
 
   useEffect(() => {
+    const filteredPosts = filterPostsByAuthor();
+    const sortedPosts = handleSort(filteredPosts);
+    setPostsToDisplay(sortedPosts);
+  }, [selectedAuthors, sortState, posts]);
     setPostsToDisplay(posts);
   }, [posts]);
 
@@ -97,16 +109,15 @@ function Posts() {
         />
       </Group>
       <Flex wrap="wrap" gap="30">
-        {postToDisplay &&
-          postToDisplay.map((post) => (
-            <PostCard
-              key={post.id}
-              title={post.title}
-              description={post.description}
-              image={post.image}
-              creationDate={post.created_at}
-            />
-          ))}
+        {postToDisplay?.map((post) => (
+          <PostCard
+            key={post.id}
+            title={post.title}
+            description={post.description}
+            image={post.image}
+            creationDate={post.created_at}
+          />
+        ))}
       </Flex>
     </Flex>
   );
