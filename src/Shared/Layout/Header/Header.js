@@ -98,7 +98,12 @@ const Header=() =>{
       <header className={classes.header}>
         <Group justify='space-between' h='100%'>
           <Group h='100%' gap={0} visibleFrom='sm'>
-            <a href='#' className={classes.link}>
+            <a
+              onClick={(e) => {
+                navigate('/');
+              }}
+              className={classes.link}
+            >
               Home
             </a>
             <HoverCard

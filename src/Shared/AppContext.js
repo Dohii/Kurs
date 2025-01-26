@@ -49,7 +49,6 @@ export const SupabaseProvider = ({ children }) => {
     setError(null);
     try {
       const { data } = await supabaseClient.get('/firme');
-      console.log(data);
       setFirme(data);
     } catch (error) {
       console.error('Error fetching firme:', error);
