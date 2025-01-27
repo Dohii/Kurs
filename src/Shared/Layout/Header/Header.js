@@ -140,10 +140,10 @@ const Header=() =>{
                 </SimpleGrid>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href='#' className={classes.link}>
+            <Link to={"/aboutUs"} className={classes.link}>
               O nama
-            </a>
-            <a href='#' className={classes.link}>
+            </Link>
+            <a href="#" className={classes.link}>
               Kontakt
             </a>
           </Group>
