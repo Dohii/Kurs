@@ -27,6 +27,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./Header.module.css";
+import { Link } from "react-router";
 
 const mockdata = [
   {
@@ -116,9 +117,9 @@ export function Header() {
                 </SimpleGrid>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="#" className={classes.link}>
+            <Link to={"/aboutUs"} className={classes.link}>
               O nama
-            </a>
+            </Link>
             <a href="#" className={classes.link}>
               Kontakt
             </a>

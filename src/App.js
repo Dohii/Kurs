@@ -4,6 +4,7 @@ import { Container } from "@mantine/core";
 import { Header } from "./Shared/Layout/Header/Header";
 import { Footer } from "./Shared/Layout/Footer/Footer";
 import { Home } from "./Views/Home/Home";
+import AboutUs from "./Views/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/" element={<Home />} />
         </Routes>
         <Footer />

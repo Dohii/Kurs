@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import supabaseClient from "../api/axiosConfig";
+import { useAboutUsContext } from "./AboutUsContext";
 
 const supabaseContext = createContext(null);
 
@@ -13,6 +14,8 @@ export const SupabaseProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const [nekiPodatak, setNekiPodatak] = useState("2");
+
+  const { FAQData, team } = useAboutUsContext();
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -59,6 +62,8 @@ export const SupabaseProvider = ({ children }) => {
         fetchPosts,
         nekiPodatak,
         setNekiPodatak,
+        FAQData,
+        team,
       }}
     >
       {children}
