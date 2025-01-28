@@ -4,16 +4,16 @@ import "./index.css";
 import App from "./App";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
-import { SupabaseProvider } from "./Shared/AppContext";
+// import { SupabaseProvider } from "./Shared/AppContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <SupabaseProvider>
+    {/* <SupabaseProvider> */}
       <MantineProvider>
         <App />
       </MantineProvider>
-    </SupabaseProvider>
+    {/* </SupabaseProvider> */}
   </React.StrictMode>
 );

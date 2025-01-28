@@ -3,7 +3,7 @@ import {
   Button,
   Container,
   Group,
-  Image,
+  // Image,
   List,
   Text,
   ThemeIcon,
