@@ -32,7 +32,7 @@ export const SupabaseProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await supabaseClient.get("/posts");
+      const { data } = await supabaseClient.get("/users");
       setPosts(data);
     } catch (error) {
       console.error("Error fetching posts:", error);
