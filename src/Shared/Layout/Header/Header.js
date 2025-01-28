@@ -6,7 +6,7 @@ import {
   IconCoin,
   IconFingerprint,
   IconNotification,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 import {
   Anchor,
   Box,
@@ -33,32 +33,33 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 const mockdata = [
   {
     icon: IconCode,
-    title: "Postovi",
-    description: "This Pokémon’s cry is very loud and distracting",
+    title: 'Postovi',
+    description: 'This Pokémon’s cry is very loud and distracting',
   },
   {
     icon: IconCoin,
-    title: "Firme",
-    description: "The fluid of Smeargle’s tail secretions changes",
+    title: 'Firme',
+    description: 'The fluid of Smeargle’s tail secretions changes',
+    link: '/firme',
   },
   {
     icon: IconBook,
-    title: "Korisnici",
-    description: "Yanma is capable of seeing 360 degrees without",
+    title: 'Korisnici',
+    description: 'Yanma is capable of seeing 360 degrees without',
   },
   {
     icon: IconFingerprint,
-    title: "Galerija",
-    description: "The shell’s rounded shape and the grooves on its.",
+    title: 'Galerija',
+    description: 'The shell’s rounded shape and the grooves on its.',
   },
 ];
 
-export function Header() {
+const Header=() =>{
+  const navigate = useNavigate();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
-  const navigate = useNavigate(); // Initialize navigate
 
   const handleNavigateToUsers = () => {
     navigate("/users"); // Navigate to /users
@@ -66,19 +67,25 @@ export function Header() {
 
   const links = mockdata.map((item) => (
     <UnstyledButton
+     
       className={classes.subLink}
+     
       key={item.title}
-      onClick={item.title === "Korisnici" ? handleNavigateToUsers : undefined}
+    
+      onClick={(event) => {
+        event.preventDefault();
+        navigate(`${item.link}`);
+      }}
     >
-      <Group wrap="nowrap" align="flex-start">
-        <ThemeIcon size={34} variant="default" radius="md">
+      <Group wrap='nowrap' align='flex-start'>
+        <ThemeIcon size={34} variant='default' radius='md'>
           <item.icon size={22} color={theme.colors.blue[6]} />
         </ThemeIcon>
         <div>
-          <Text size="sm" fw={500}>
+          <Text size='sm' fw={500}>
             {item.title}
           </Text>
-          <Text size="xs" c="dimmed">
+          <Text size='xs' c='dimmed'>
             {item.description}
           </Text>
         </div>
@@ -89,22 +96,27 @@ export function Header() {
   return (
     <Box pb={120}>
       <header className={classes.header}>
-        <Group justify="space-between" h="100%">
-          <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="#" className={classes.link}>
+        <Group justify='space-between' h='100%'>
+          <Group h='100%' gap={0} visibleFrom='sm'>
+            <a
+              onClick={(e) => {
+                navigate('/');
+              }}
+              className={classes.link}
+            >
               Home
             </a>
             <HoverCard
               width={600}
-              position="bottom"
-              radius="md"
-              shadow="md"
+              position='bottom'
+              radius='md'
+              shadow='md'
               withinPortal
             >
               <HoverCard.Target>
-                <a href="#" className={classes.link}>
+                <a href='#' className={classes.link}>
                   <Center inline>
-                    <Box component="span" mr={5}>
+                    <Box component='span' mr={5}>
                       Kategorije
                     </Box>
                     <IconChevronDown size={16} color={theme.colors.blue[6]} />
@@ -112,38 +124,38 @@ export function Header() {
                 </a>
               </HoverCard.Target>
 
-              <HoverCard.Dropdown style={{ overflow: "hidden" }}>
-                <Group justify="space-between" px="md">
+              <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
+                <Group justify='space-between' px='md'>
                   <Text fw={500}>Kategorije</Text>
-                  <Anchor href="#" fz="xs">
+                  <Anchor href='#' fz='xs'>
                     Pogledaj Sve
                   </Anchor>
                 </Group>
 
-                <Divider my="sm" />
+                <Divider my='sm' />
 
                 <SimpleGrid cols={2} spacing={0}>
                   {links}
                 </SimpleGrid>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="#" className={classes.link}>
+            <a href='#' className={classes.link}>
               O nama
             </a>
-            <a href="#" className={classes.link}>
+            <a href='#' className={classes.link}>
               Kontakt
             </a>
           </Group>
 
-          <Group visibleFrom="sm">
-            <Button variant="default">Prijava</Button>
+          <Group visibleFrom='sm'>
+            <Button variant='default'>Prijava</Button>
             <Button>Registracija</Button>
           </Group>
 
           <Burger
             opened={drawerOpened}
             onClick={toggleDrawer}
-            hiddenFrom="sm"
+            hiddenFrom='sm'
           />
         </Group>
       </header>
@@ -151,38 +163,38 @@ export function Header() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="Navigation"
-        hiddenFrom="sm"
+        size='100%'
+        padding='md'
+        title='Navigation'
+        hiddenFrom='sm'
         zIndex={1000000}
       >
-        <ScrollArea h="calc(100vh - 80px" mx="-md">
-          <Divider my="sm" />
+        <ScrollArea h='calc(100vh - 80px' mx='-md'>
+          <Divider my='sm' />
 
-          <a href="#" className={classes.link}>
+          <a href='#' className={classes.link}>
             Home
           </a>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
-              <Box component="span" mr={5}>
+              <Box component='span' mr={5}>
                 Features
               </Box>
               <IconChevronDown size={16} color={theme.colors.blue[6]} />
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
+          <a href='#' className={classes.link}>
             Learn
           </a>
-          <a href="#" className={classes.link}>
+          <a href='#' className={classes.link}>
             Academy
           </a>
 
-          <Divider my="sm" />
+          <Divider my='sm' />
 
-          <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
+          <Group justify='center' grow pb='xl' px='md'>
+            <Button variant='default'>Log in</Button>
             <Button>Sign up</Button>
           </Group>
         </ScrollArea>
@@ -190,3 +202,4 @@ export function Header() {
     </Box>
   );
 }
+export default Header;
