@@ -18,7 +18,7 @@ export const SupabaseProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await supabaseClient.get("/users");
+      const { data } = await supabaseClient.get("/users");      
       setUsers(data);
     } catch (error) {
       console.error("Error fetching users:", error);
