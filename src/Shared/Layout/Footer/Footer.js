@@ -11,7 +11,7 @@ const data = [
     title: "Kategorije",
     links: [
       { label: "Kompanije", link: "#" },
-      { label: "Korisnici", link: "#" },
+      { label: "Korisnici", link: "/users" },
       { label: "Postovi", link: "#" },
       { label: "Sta ja znam", link: "#" },
     ],
