@@ -12,9 +12,11 @@ import { useState, useEffect } from 'react';
 
 function Firme() {
   const { firme } = useSupabase();
+  console.log(firme);
   const [searchState, setSearchState] = useState('');
-  const [filteredData, setFilteredData] = useState(firme);
+  const [filteredData, setFilteredData] = useState([]);
   const [activePage, setActivePage] = useState(1);
+
   const itemsPerPage = 6;
   const maxPages =
     filteredData.length % itemsPerPage !== 0
@@ -35,7 +37,7 @@ function Firme() {
       });
       setFilteredData(filteredFirme);
     }
-  }, [searchState]);
+  }, [searchState, firme]);
 
   const handleChange = function (e) {
     setSearchState(e.target.value.toLowerCase());
