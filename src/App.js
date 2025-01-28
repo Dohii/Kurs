@@ -8,6 +8,7 @@ import  Users  from "./Views/Users";
 import Firme from './Views/Firme/Firme';
 import Header from "./Shared/Layout/Header/Header";
 
+import Board from "./Components/Galery/Board/Board";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/korisnici" element={<Users />} />
           <Route path='/firme' element={<Firme />} />
+          <Route path="/galerija" element={<Board />} />
         </Routes>
         <Footer />
       </BrowserRouter>
