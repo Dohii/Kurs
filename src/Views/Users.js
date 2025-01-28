@@ -38,6 +38,7 @@ useEffect(()=>{
     setDeleteUserId(userId);
     setModalOpen(true);
   };
+
   // Close modal
   const closeDeleteModal = () => {
     setDeleteUserId(null);
