@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Button,
@@ -19,20 +19,25 @@ const Users = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     last_name: "",
-    // email: "",
-    // avatar: "",
   });
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [sortedUsers, setSortedUsers] = useState(users);
-  const [sortOrder, setSortOrder] = useState("asc"); // 'asc' or 'desc'
+  const [sortedUsers, setSortedUsers] = useState([]);
+  const [sortOrder, setSortOrder] = useState("asc");
+
+
+useEffect(()=>{
+  if(users){
+    setSortedUsers(users)
+  }
+  },[users])
+
 
   // Open modal and set user ID to delete
   const openDeleteModal = (userId) => {
     setDeleteUserId(userId);
     setModalOpen(true);
   };
-
   // Close modal
   const closeDeleteModal = () => {
     setDeleteUserId(null);
