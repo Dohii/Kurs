@@ -46,6 +46,7 @@ const mockdata = [
     icon: IconBook,
     title: 'Korisnici',
     description: 'Yanma is capable of seeing 360 degrees without',
+    link: '/korisnici',
   },
   {
     icon: IconFingerprint,
