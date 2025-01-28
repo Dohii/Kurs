@@ -46,8 +46,9 @@ const mockdata = [
   },
   {
     icon: IconFingerprint,
-    title: "Galerija",
-    description: "The shell’s rounded shape and the grooves on its.",
+    title: 'Galerija',
+    description: 'The shell’s rounded shape and the grooves on its.',
+    link: '/galerija',
   },
 ];
 
