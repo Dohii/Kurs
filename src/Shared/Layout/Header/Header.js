@@ -145,7 +145,7 @@ const Header=() =>{
               O nama
             </Link>
             <a href="#" className={classes.link}>
-              Kontakt
+              Kontakt Ali pravi
             </a>
           </Group>
 
