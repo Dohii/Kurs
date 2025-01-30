@@ -12,6 +12,7 @@ const data = [
     title: 'Kategorije',
     links: [
       { label: "Kompanije", link: "/firme" },
+      { label: "Kontakt", link: "/Contact" },
       { label: "Korisnici", link: "/users" },
       { label: "Postovi", link: "#" },
       { label: "Sta ja znam", link: "#" },

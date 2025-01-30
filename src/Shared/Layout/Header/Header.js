@@ -144,9 +144,9 @@ const Header=() =>{
             <Link to={"/aboutUs"} className={classes.link}>
               O nama
             </Link>
-            <a href="#" className={classes.link}>
-              Kontakt Ali pravi
-            </a>
+            <Link to={"/contact"} className={classes.link}>
+              Kontakt
+            </Link>
           </Group>
 
           <Group visibleFrom='sm'>
