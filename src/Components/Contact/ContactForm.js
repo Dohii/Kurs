@@ -1,62 +1,60 @@
 // @ts-nocheck
-import React, { Suspense } from 'react';
-import { 
-  Container, 
-  TextInput, 
-  Textarea, 
-  Button, 
-  Title, 
-  Paper, 
+import React, { Suspense } from "react";
+import {
+  Container,
+  TextInput,
+  Textarea,
+  Button,
+  Title,
+  Paper,
   Table,
   Box,
   Stack,
-  SimpleGrid
-} from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { useMessage } from './MessageContext.tsx';
-import Map from './Map.tsx'; 
-
-type FormValues = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
-
-type Message = FormValues & {
-  timestamp?: string;
-};
-
-
+  SimpleGrid,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useMessage } from "./MessageContext";
+import Map from "./Map";
 
 const MapComponent = () => (
-   <Suspense fallback={
-     <div style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-       <div>Ucitavanje mape...</div>
-     </div>
-   }>
-     <Map />
-   </Suspense>
- );
-const ContactForm: React.FC = () => {
+  <Suspense
+    fallback={
+      <div
+        style={{
+          height: "400px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div>Ucitavanje mape...</div>
+      </div>
+    }
+  >
+    <Map />
+  </Suspense>
+);
+const ContactForm = () => {
   const { messages, addMessage } = useMessage();
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     initialValues: {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
     },
     validate: {
-      name: (value) => value.trim().length === 0 ? 'Name is required' : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      subject: (value) => value.trim().length === 0 ? 'Subject is required' : null,
-      message: (value) => value.trim().length === 0 ? 'Message is required' : null,
+      name: (value) => (value.trim().length === 0 ? "Name is required" : null),
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      subject: (value) =>
+        value.trim().length === 0 ? "Subject is required" : null,
+      message: (value) =>
+        value.trim().length === 0 ? "Message is required" : null,
     },
   });
 
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values) => {
     try {
       addMessage({
         ...values,
@@ -64,17 +62,19 @@ const ContactForm: React.FC = () => {
       });
       form.reset();
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
     }
   };
 
   return (
     <Container size="lg">
       <Box mb={50}>
-        <Title order={1} ta="center" mb="xl">Kontaktirajte nas </Title>
-        
-        <div style={{ height: '400px', marginBottom: '2rem' }}>
-        {<MapComponent /> }
+        <Title order={1} ta="center" mb="xl">
+          Kontaktirajte nas{" "}
+        </Title>
+
+        <div style={{ height: "400px", marginBottom: "2rem" }}>
+          {<MapComponent />}
         </div>
 
         <Paper shadow="sm" radius="md" p="xl" withBorder>
@@ -84,13 +84,13 @@ const ContactForm: React.FC = () => {
                 required
                 label="Ime"
                 placeholder="Vase ime"
-                {...form.getInputProps('name')}
+                {...form.getInputProps("name")}
               />
               <TextInput
                 required
                 label="Email"
                 placeholder="example@email.com"
-                {...form.getInputProps('email')}
+                {...form.getInputProps("email")}
               />
             </SimpleGrid>
 
@@ -99,7 +99,7 @@ const ContactForm: React.FC = () => {
                 required
                 label="Predmet"
                 placeholder="Predmet"
-                {...form.getInputProps('subject')}
+                {...form.getInputProps("subject")}
               />
 
               <Textarea
@@ -107,14 +107,10 @@ const ContactForm: React.FC = () => {
                 label="Poruka"
                 placeholder="Poruka"
                 minRows={4}
-                {...form.getInputProps('message')}
+                {...form.getInputProps("message")}
               />
 
-              <Button 
-                type="submit" 
-                fullWidth
-                loading={form.submitting}
-              >
+              <Button type="submit" fullWidth loading={form.submitting}>
                 Send Message
               </Button>
             </Stack>
@@ -122,7 +118,9 @@ const ContactForm: React.FC = () => {
         </Paper>
 
         <Box mt={50}>
-          <Title order={2} ta="center" mb="lg">Poruke</Title>
+          <Title order={2} ta="center" mb="lg">
+            Poruke
+          </Title>
           <Paper shadow="sm" radius="md" withBorder>
             {messages.length > 0 ? (
               <Table striped highlightOnHover>
@@ -136,14 +134,15 @@ const ContactForm: React.FC = () => {
                   </Table.Tr>
                 </Table.Thead>
                 <Table.Tbody>
-                  {messages.map((msg: Message, index: number) => (
+                  {messages.map((msg, index) => (
                     <Table.Tr key={index}>
                       <Table.Td>{msg.name}</Table.Td>
                       <Table.Td>{msg.email}</Table.Td>
                       <Table.Td>{msg.subject}</Table.Td>
                       <Table.Td>{msg.message}</Table.Td>
                       <Table.Td>
-                        {msg.timestamp && new Date(msg.timestamp).toLocaleDateString()}
+                        {msg.timestamp &&
+                          new Date(msg.timestamp).toLocaleDateString()}
                       </Table.Td>
                     </Table.Tr>
                   ))}
